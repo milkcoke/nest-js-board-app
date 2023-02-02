@@ -27,6 +27,16 @@ export class BoardService {
         return allBoardDtos;
     }
 
+    getBoardById(readBoardVo : ReadBoardVo): ReadBoardDto {
+        const reqBoardId = readBoardVo.id;
+
+        // bigint 비교를 위해
+        const foundBoard = this.boards.find((board: Board) => board.id == reqBoardId);
+        console.dir(foundBoard);
+        const {id, title, description, status} = foundBoard;
+        return new ReadBoardDto(id, title, description, status);
+    }
+
     createBoard(createBoardVo: CreateBoardVo) {
         const {title, description, status} = createBoardVo;
 
