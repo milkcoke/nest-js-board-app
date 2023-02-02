@@ -12,13 +12,14 @@ export class BoardController {
     constructor(private boardService: BoardService) {}
 
     @Get('/')
-    getAllBoards() {
+    getAllBoards(): ReadAllBoardDto[] {
         return this.boardService.getAllBoards();
     }
 
-    // ts 에서는 request body 어케할까?
-    // 그.. VO 가 없는데?
-    // typescript record 쓰나?
+    @Get('/:id')
+    getBoardById(@Param() readBoardVo: ReadBoardVo) {
+        return this.boardService.getBoardById(readBoardVo);
+    }
 
     @Post('/')
     createBoard(
