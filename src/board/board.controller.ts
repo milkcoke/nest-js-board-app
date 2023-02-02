@@ -5,6 +5,7 @@ import {CreateBoardVo} from "./vo/CreateBoard.vo";
 import {ReadAllBoardDto} from "./dto/ReadAllBoard.dto";
 import {UpdateBoardStatusVo} from "./vo/UpdateBoardStatus.vo";
 import {UpdateBoardStatusDto} from "./dto/UpdateBoardStatus.dto";
+import {BoardStatusValidationPipe} from "./pipes/boardStatusValidation.pipe";
 
 @Controller('boards')
 export class BoardController {
@@ -33,7 +34,7 @@ export class BoardController {
     @Patch('/:id')
     updateBoardStatus(
         @Param('id') id: bigint,
-        @Body() updateBoardStatusVo : UpdateBoardStatusVo
+        @Body(BoardStatusValidationPipe) updateBoardStatusVo : UpdateBoardStatusVo,
     ) : UpdateBoardStatusDto {
         return this.boardService.updateBoardStatus(id, updateBoardStatusVo);
     }
