@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable, NotFoundException} from '@nestjs/common';
 import {Board} from "./Board.model";
 import {CreateBoardVo} from "./vo/CreateBoard.vo";
 import {CreateBoardDto} from "./dto/CreateBoard.dto";
@@ -29,6 +29,9 @@ export class BoardService {
     }
 
     getBoardById(reqId : bigint): ReadBoardDto {
+        if (!this.isExistBoardById(reqId)) {
+            throw new NotFoundException(`Not found board ID : ${reqId}`);
+        }
 
         // bigint 비교를 위해 == 사용
         const foundBoard = this.boards.find((board: Board) => board.id == reqId);
@@ -53,13 +56,26 @@ export class BoardService {
     }
 
     updateBoardStatus(reqId: bigint, updateBoardVo: UpdateBoardStatusVo) : UpdateBoardStatusDto {
+        if (!this.isExistBoardById(reqId)) {
+            throw new NotFoundException(`Not found board ID : ${reqId}`);
+        }
+
         const foundBoard = this.boards.find((board: Board)=> board.id == reqId);
+
         foundBoard.status = updateBoardVo.status;
         const {id, title, description, status} = foundBoard;
 
         return new UpdateBoardStatusDto(id, title, description, status);
     }
     deleteById(reqId: bigint) {
+        if (!this.isExistBoardById(reqId)) {
+            throw new NotFoundException(`Not found board ID : ${reqId}`);
+        }
+
         this.boards = this.boards.filter((board: Board)=>board.id != reqId);
+    }
+
+    private isExistBoardById(id: bigint) : boolean{
+        return this.boards.some((board: Board) => board.id == id);
     }
 }
