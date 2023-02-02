@@ -52,8 +52,14 @@ export class BoardService {
         return new CreateBoardDto(newBoard.id, newBoard.title, newBoard.description, newBoard.status);;
     }
 
-    deleteById(deleteBoardVo: DeleteBoardVo) {
-        const reqBoardId = deleteBoardVo.id;
-        this.boards = this.boards.filter((board: Board)=>board.id != reqBoardId);
+    updateBoardStatus(reqId: bigint, updateBoardVo: UpdateBoardStatusVo) : UpdateBoardStatusDto {
+        const foundBoard = this.boards.find((board: Board)=> board.id == reqId);
+        foundBoard.status = updateBoardVo.status;
+        const {id, title, description, status} = foundBoard;
+
+        return new UpdateBoardStatusDto(id, title, description, status);
+    }
+    deleteById(reqId: bigint) {
+        this.boards = this.boards.filter((board: Board)=>board.id != reqId);
     }
 }

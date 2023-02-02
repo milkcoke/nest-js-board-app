@@ -29,6 +29,15 @@ export class BoardController {
         return this.boardService.createBoard(createBoardVo);
     }
 
+    @Patch('/:id')
+    updateBoardStatus(
+        @Param('id') id: bigint,
+        @Body() updateBoardStatusVo : UpdateBoardStatusVo
+    ) : UpdateBoardStatusDto {
+        return this.boardService.updateBoardStatus(id, updateBoardStatusVo);
+    }
+
+
     @Delete('/:id')
     deleteBoardById(@Param('id') id: bigint) {
         return this.boardService.deleteById(id);
