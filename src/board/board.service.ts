@@ -5,6 +5,7 @@ import {CreateBoardDto} from "./dto/CreateBoard.dto";
 import {ReadBoardDto} from "./dto/ReadBoard.dto";
 import {ReadBoardVo} from "./vo/ReadBoard.vo";
 import {ReadAllBoardDto} from "./dto/ReadAllBoard.dto";
+import {DeleteBoardVo} from "./vo/DeleteBoard.vo";
 
 @Injectable()
 export class BoardService {
@@ -30,9 +31,8 @@ export class BoardService {
     getBoardById(readBoardVo : ReadBoardVo): ReadBoardDto {
         const reqBoardId = readBoardVo.id;
 
-        // bigint 비교를 위해
+        // bigint 비교를 위해 == 사용
         const foundBoard = this.boards.find((board: Board) => board.id == reqBoardId);
-        console.dir(foundBoard);
         const {id, title, description, status} = foundBoard;
         return new ReadBoardDto(id, title, description, status);
     }
@@ -51,5 +51,10 @@ export class BoardService {
         this.boards.push(newBoard);
 
         return new CreateBoardDto(newBoard.id, newBoard.title, newBoard.description, newBoard.status);;
+    }
+
+    deleteById(deleteBoardVo: DeleteBoardVo) {
+        const reqBoardId = deleteBoardVo.id;
+        this.boards = this.boards.filter((board: Board)=>board.id != reqBoardId);
     }
 }
