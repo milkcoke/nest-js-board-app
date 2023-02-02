@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import {Board} from "./Board.model";
-import {CreateBoardVo} from "./vo/create-board.vo";
-import {CreateBoardDto} from "./dto/create-board.dto";
+import {CreateBoardVo} from "./vo/CreateBoard.vo";
+import {CreateBoardDto} from "./dto/CreateBoard.dto";
+import {ReadBoardDto} from "./dto/ReadBoard.dto";
+import {ReadBoardVo} from "./vo/ReadBoard.vo";
+import {ReadAllBoardDto} from "./dto/ReadAllBoard.dto";
 
 @Injectable()
 export class BoardService {
@@ -13,8 +16,15 @@ export class BoardService {
 
     // return type BoardDTO 권장
     // Entity 혹은 일반 타입 넘기는것은 권장되지않음.
-    getAllBoards(): Board[] {
-        return this.boards;
+    getAllBoards(): ReadAllBoardDto[] {
+        const allBoardDtos = [];
+
+        for (const board of this.boards) {
+            const {id, title, description, status} = board;
+            allBoardDtos.push(new ReadAllBoardDto(id, title, description, status));
+        }
+
+        return allBoardDtos;
     }
 
     createBoard(createBoardVo: CreateBoardVo) {

@@ -1,9 +1,9 @@
-import {Body, Controller, Get, Post} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post} from '@nestjs/common';
 import {BoardService} from "./board.service";
-import {BoardStatus} from "./BoardStatus.model";
-import {Board} from "./Board.model";
-import {CreateBoardDto} from "./dto/create-board.dto";
-import {CreateBoardVo} from "./vo/create-board.vo";
+import {CreateBoardDto} from "./dto/CreateBoard.dto";
+import {CreateBoardVo} from "./vo/CreateBoard.vo";
+import {ReadBoardVo} from "./vo/ReadBoard.vo";
+import {ReadAllBoardDto} from "./dto/ReadAllBoard.dto";
 
 @Controller('boards')
 export class BoardController {
@@ -20,7 +20,6 @@ export class BoardController {
     // 그.. VO 가 없는데?
     // typescript record 쓰나?
 
-    // Spring 처럼 @Body 지림
     @Post('/')
     createBoard(
         @Body() createBoardVo: CreateBoardVo
