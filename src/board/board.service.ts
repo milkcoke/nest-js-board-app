@@ -3,9 +3,9 @@ import {Board} from "./Board.model";
 import {CreateBoardVo} from "./vo/CreateBoard.vo";
 import {CreateBoardDto} from "./dto/CreateBoard.dto";
 import {ReadBoardDto} from "./dto/ReadBoard.dto";
-import {ReadBoardVo} from "./vo/ReadBoard.vo";
 import {ReadAllBoardDto} from "./dto/ReadAllBoard.dto";
-import {DeleteBoardVo} from "./vo/DeleteBoard.vo";
+import {UpdateBoardStatusVo} from "./vo/UpdateBoardStatus.vo";
+import {UpdateBoardStatusDto} from "./dto/UpdateBoardStatus.dto";
 
 @Injectable()
 export class BoardService {
@@ -28,11 +28,10 @@ export class BoardService {
         return allBoardDtos;
     }
 
-    getBoardById(readBoardVo : ReadBoardVo): ReadBoardDto {
-        const reqBoardId = readBoardVo.id;
+    getBoardById(reqId : bigint): ReadBoardDto {
 
         // bigint 비교를 위해 == 사용
-        const foundBoard = this.boards.find((board: Board) => board.id == reqBoardId);
+        const foundBoard = this.boards.find((board: Board) => board.id == reqId);
         const {id, title, description, status} = foundBoard;
         return new ReadBoardDto(id, title, description, status);
     }

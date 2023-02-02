@@ -1,10 +1,10 @@
-import {Body, Controller, Delete, Get, Param, Post} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Patch, Post} from '@nestjs/common';
 import {BoardService} from "./board.service";
 import {CreateBoardDto} from "./dto/CreateBoard.dto";
 import {CreateBoardVo} from "./vo/CreateBoard.vo";
-import {ReadBoardVo} from "./vo/ReadBoard.vo";
 import {ReadAllBoardDto} from "./dto/ReadAllBoard.dto";
-import {DeleteBoardVo} from "./vo/DeleteBoard.vo";
+import {UpdateBoardStatusVo} from "./vo/UpdateBoardStatus.vo";
+import {UpdateBoardStatusDto} from "./dto/UpdateBoardStatus.dto";
 
 @Controller('boards')
 export class BoardController {
@@ -18,8 +18,8 @@ export class BoardController {
     }
 
     @Get('/:id')
-    getBoardById(@Param() readBoardVo: ReadBoardVo) {
-        return this.boardService.getBoardById(readBoardVo);
+    getBoardById(@Param('id') id: bigint) {
+        return this.boardService.getBoardById(id);
     }
 
     @Post('/')
@@ -30,7 +30,7 @@ export class BoardController {
     }
 
     @Delete('/:id')
-    deleteBoardById(@Param() deleteBoardVo: DeleteBoardVo) {
-        return this.boardService.deleteById(deleteBoardVo);
+    deleteBoardById(@Param('id') id: bigint) {
+        return this.boardService.deleteById(id);
     }
 }
