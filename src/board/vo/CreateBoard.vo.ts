@@ -1,6 +1,8 @@
 import {BoardStatus} from "../BoardStatus.model";
+import {IsNotEmpty} from "class-validator";
 
 export class CreateBoardVo {
+    @IsNotEmpty()
     readonly title: string;
     readonly description: string;
     // 값 강제가 안됨.
