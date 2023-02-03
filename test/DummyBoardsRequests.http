@@ -1,0 +1,33 @@
+### SEND POST board rumble
+# @name Create rumble
+POST http://localhost:3000/boards
+Content-Type: application/json
+
+{
+  "title": "rumble",
+  "description": "League of legend champion rumble.",
+  "status": "PUBLIC"
+}
+
+
+### SEND POST board jayce
+# @name Create jayce
+POST http://localhost:3000/boards
+Content-Type: application/json
+
+{
+"title": "jayce",
+"description": "League of legend champion jayce.",
+"status": "PUBLIC"
+}
+
+### SEND POST board khazix
+# @name Create khazix
+POST http://localhost:3000/boards
+Content-Type: application/json
+
+{
+  "title": "khazix",
+  "description": "League of legend champion khazix.",
+  "status": "PUBLIC"
+}

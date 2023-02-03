@@ -1,0 +1,7 @@
+server:
+  port: 3000
+
+db:
+  type: 'h2'
+  port: 8082
+  database: 'board-app'
