@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
+import {MiddlewareConsumer, Module, RequestMethod} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BoardModule } from './board/board.module';
 import './utils/bigintHelpers';
+import {CopyHeadersMiddlewareMiddleware} from "./middleware/header/CopyHeadersMiddleware.middleware";
 
 @Module({
   // root 모듈 (AppModule) 이 부모
@@ -11,4 +12,13 @@ import './utils/bigintHelpers';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+        .apply(CopyHeadersMiddlewareMiddleware)
+        .forRoutes({
+          path:'*',
+          method: RequestMethod.ALL
+        });
+  }
+}
