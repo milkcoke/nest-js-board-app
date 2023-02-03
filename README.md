@@ -158,7 +158,7 @@ boardDto.title // ⚠️ 접근 지정자를 명시하지 않아 불가능.
 ## Pipe
 `@Injectable` decorator 로 주석이 달린 클래스 \
 data transformation, data validation 용도로 사용 \
-Controller 에 등록된 Handler 에 도달하기 전에 작동한다.
+Middleware 와 Controller 사이에 작동한다.
 
 ### How to use pipe?
 
@@ -211,6 +211,16 @@ $ yarn add class-validator class-transformer
 - DefaultValuePipe
 
 ---
+
+## Logging
+Nest.js 에서는 기본 Logger 를 제공.
+
+### 종류
+- Log: 중요 정보 로그
+- Warning: 치명적이지 않은 처리되지 않은 문제 로그
+- Error: 치명적인 문제 로그
+- Debug: 개발자용 디버깅 로그
+- Verbose: 애플리케이션 운영 로그
 
 
 
