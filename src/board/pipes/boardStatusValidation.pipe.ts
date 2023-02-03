@@ -1,5 +1,5 @@
 import {ArgumentMetadata, BadRequestException, PipeTransform} from "@nestjs/common";
-import {BoardStatus} from "../BoardStatus.model";
+import {isBoardStatus} from "../BoardStatus.model";
 
 export class BoardStatusValidationPipe implements PipeTransform {
 
@@ -8,7 +8,7 @@ export class BoardStatusValidationPipe implements PipeTransform {
     transform(value: any, metadata: ArgumentMetadata): any {
 
         console.dir(value); // {status: 'PRIVATE'}
-        if (!this.isValidBoardStatus(value.status)) {
+        if (!isBoardStatus(value.status)) {
             throw new BadRequestException(`status: ${value.status} is not allowed`);
         }
 
@@ -17,20 +17,8 @@ export class BoardStatusValidationPipe implements PipeTransform {
         //   type: 'body',
         //   data: undefined
         // }
-        console.dir(metadata);
+        // console.dir(metadata);
 
         return value;
-    }
-
-    private isValidBoardStatus<T>(status: T) : boolean{
-        if (status !instanceof String) {
-            return false;
-        }
-
-        if (!Object.values(BoardStatus).some((boardStatus)=> boardStatus === status)) {
-            return false;
-        }
-
-        return true;
     }
 }

@@ -1,4 +1,4 @@
-import {BoardStatus} from "../BoardStatus.model";
+import {BoardStatus, BoardStatusType} from "../BoardStatus.model";
 import {IsNotEmpty} from "class-validator";
 
 export class CreateBoardVo {
@@ -6,9 +6,9 @@ export class CreateBoardVo {
     readonly title: string;
     readonly description: string;
     // 값 강제가 안됨.
-    readonly status: keyof typeof BoardStatus;
+    readonly status: BoardStatusType;
 
-    constructor(title: string, description: string, status: keyof typeof BoardStatus) {
+    constructor(title: string, description: string, status: BoardStatusType) {
         this.title = title;
         this.description = description;
         this.status = status;
