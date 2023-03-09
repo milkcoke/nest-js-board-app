@@ -1,16 +1,21 @@
-import {BoardStatusType, BoardStatus} from "../BoardStatus.model";
+import { BoardStatusType, BoardStatus } from '../BoardStatus.model';
 
 export class CreateBoardDto {
-    readonly id: bigint;
-    title: string;
-    description: string;
+  readonly id: bigint;
+  title: string;
+  description: string;
 
-    status: BoardStatusType;
+  status: BoardStatusType;
 
-    constructor(id: bigint, title: string, description: string, status: BoardStatusType) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.status = status;
-    }
+  constructor(
+    id: bigint,
+    title: string,
+    description: string,
+    status: BoardStatusType,
+  ) {
+    this.id = id;
+    this.title = title;
+    this.description = description;
+    this.status = status;
+  }
 }

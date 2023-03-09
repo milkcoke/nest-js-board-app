@@ -1,8 +1,8 @@
-import {BoardStatus, BoardStatusType} from "../BoardStatus.model";
+import { BoardStatus, BoardStatusType } from '../BoardStatus.model';
 
 export class UpdateBoardStatusVo {
-    readonly status: BoardStatusType;
-    constructor(status: BoardStatusType) {
-        this.status = status;
-    }
+  readonly status: BoardStatusType;
+  constructor(status: BoardStatusType) {
+    this.status = status;
+  }
 }
